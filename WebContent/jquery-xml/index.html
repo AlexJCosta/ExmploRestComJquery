@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Papermashup.com | jQuery Image Zoom</title>
+<link href="../style.css" rel="stylesheet" type="text/css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: "books.xml",
+        dataType: "xml",
+        success: xmlParser
+    });
+});
+
+
+
+
+
+function xmlParser(xml) {
+    $(xml).find("noticia").each(function () {
+    	var titulo = $(this).find('titulo').text();    
+    	var conteudo = $(this).find("mensagem").text();
+    	
+        $(".main").append('<div class="bookCss">' +titulo+'</div>');
+        $(".content").append('<div class="conteudoCss" >'+conteudo+'</div>');
+        $(".bookCss").fadeIn(2000);
+        $(".conteudoCss").fadeIn(2000);
+    });
+
+
+
+}
+</script>
+
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "http://rest-service.guides.spring.io/greeting"
+    }).then(function(data) {
+       $('.greeting-id').append('<div style="font-size:50px;">'+data.id+'</div>');
+       $('.greeting-content').append(data.content);
+    });
+});
+
+</script>
+
+<style> 
+
+
+.bookCss{
+
+float:left;
+margin:10px;
+font-size:30px;
+font-weight:bold;
+padding:5px;
+display:none;
+
+}
+
+.conteudoCss{
+
+float:left;
+margin:10px;
+font-size:15px;
+padding:5px;
+color:#000;
+display:none;
+
+}
+
+.loader{
+height:11px;
+}
+
+</style> 
+
+
+<link href="dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+	<h1 style="margin-top:14px; color:#777; margin-bottom:4px;">Notícias server</h1>
+	<div class="thumbnail" style="height: 500px; width: 750px; border: 2px solid #000; background-color: #fff;">
+		<div class="main"></div>
+		<div class="content"></div>
+		<p class="greeting-id">Contagem</p>
+	</div>
+</div>
+
+</body>
+</html>
